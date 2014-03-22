@@ -78,7 +78,7 @@ for line in sys.stdin:
 		for word in omitredundant(x):
 			str += "/"+word
 		str +="$"
-		if (i == len(spaceOutPunct(line).split())):
+		if (not i == len(spaceOutPunct(line).split())-1):
 			str +=" "
 				
 print (str)
