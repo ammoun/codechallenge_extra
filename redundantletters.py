@@ -54,7 +54,7 @@ def discardUnknowns(lstCand):
 
 #print the list of filtered candidates.
 def outputResults(str):
-	print discardUnknowns(omitredundant(str))
+	print (discardUnknowns(omitredundant(str)))
 	
 	
 	
