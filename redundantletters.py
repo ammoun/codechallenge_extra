@@ -11,6 +11,19 @@ automorphPATH = "en-es.automorf.bin"
 def isPunctuation(str):
 	return all(x in string.punctuation for x in str)
 
+#add spaces when punctuation appears after and before letters 
+#avoided regex substitution
+def spaceOutPunct(str):
+	spaced = ""
+	i = 0
+	while i < len(str):
+		if (i<len(str) -1) and (not str[i] in string.punctuation and str[i+1] in string.punctuation or str[i] in string.punctuation and not str[i+1] in string.punctuation):
+			spaced += str[i]+ " "
+			i+=1
+		else: 
+			spaced += str[i]
+			i+=1
+	return spaced
 
 def omitredundant(str):
 	if not isPunctuation(str):
@@ -59,12 +72,14 @@ def outputResults(str):
 
 #apply omitredundant to standard input words
 str = ""	
+
 for line in sys.stdin:
-	for x in line.split(): 
+	for x in spaceOutPunct(line).split(): 
 		str += "^"+ x 
 		for word in omitredundant(x):
 			str += "/"+word
 		str +="$ "	
 print (str)
+
    
 
