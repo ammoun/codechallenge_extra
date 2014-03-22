@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import string
 import os
+import sys
 
 
 automorphPATH = "en-es.automorf.bin"
@@ -55,11 +56,15 @@ def discardUnknowns(lstCand):
 #print the list of filtered candidates.
 def outputResults(str):
 	print (discardUnknowns(omitredundant(str)))
-	
-	
-	
-outputResults("hellllllooooo")
-outputResults("meeeeettttttt")
-outputResults("Faaaaaantaaaaaastiiiiccccccccc")
-outputResults("!!!!!!!!!!!!")
+
+#apply omitredundant to standard input words
+str = ""	
+for line in sys.stdin:
+	for x in line.split(): 
+		str += "^"+ x 
+		for word in omitredundant(x):
+			str += "/"+word
+		str +="$ "	
+print (str)
+   
 
