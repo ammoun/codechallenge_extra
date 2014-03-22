@@ -72,13 +72,15 @@ def outputResults(str):
 
 #apply omitredundant to standard input words
 str = ""	
-
 for line in sys.stdin:
-	for x in spaceOutPunct(line).split(): 
+	for i,x in enumerate(spaceOutPunct(line).split()): 
 		str += "^"+ x 
 		for word in omitredundant(x):
 			str += "/"+word
-		str +="$ "	
+		str +="$"
+		if (i == len(spaceOutPunct(line).split())):
+			str +=" "
+				
 print (str)
 
    
