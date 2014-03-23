@@ -20,9 +20,11 @@ def spaceOutPunct(str):
 		if (i<len(str) -1) and (not str[i] in string.punctuation and str[i+1] in string.punctuation or str[i] in string.punctuation and not str[i+1] in string.punctuation):
 			spaced += str[i]+ " "
 			i+=1
+			
 		else: 
 			spaced += str[i]
 			i+=1
+			
 	return spaced
 
 def omitredundant(str):
@@ -73,12 +75,13 @@ def outputResults(str):
 #apply omitredundant to standard input words
 str = ""	
 for line in sys.stdin:
-	for i,x in enumerate(spaceOutPunct(line).split()): 
-		str += "^"+ x 
-		for word in omitredundant(x):
-			str += "/"+word
-		str +="$"
-		if (not i == len(spaceOutPunct(line).split())-1):
+	for i,x in enumerate(line.split()):
+		for v in spaceOutPunct(x).split():
+			str += "^"+ v 
+			for word in omitredundant(v):
+				str += "/"+word
+			str +="$"
+		if (not i == len(line.split())-1):
 			str +=" "
 				
 print (str)
